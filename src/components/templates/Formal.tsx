@@ -98,9 +98,18 @@ export default function FormalTemplate({ data, wishes, isPreview }: TemplateProp
           className="space-y-6 max-w-2xl"
         >
           {/* Simple Arabic Calligraphy */}
-          <div className="mb-6">
-            <ArabicCalligraphy text={IslamicPhrases.assalamualaikum} size="small" />
-            <p className="text-xs mt-2 text-gray-500">Assalamualaikum</p>
+          <div className="mb-6 space-y-4">
+            {/* Bismillahirrahmanirrahim */}
+            <div>
+              <ArabicCalligraphy text={IslamicPhrases.bismillah} size="small" />
+              <p className="text-xs mt-2 text-gray-500">Bismillahirrahmanirrahim</p>
+            </div>
+            
+            {/* Assalamualaikum */}
+            <div>
+              <ArabicCalligraphy text={IslamicPhrases.assalamualaikum} size="small" />
+              <p className="text-xs mt-2 text-gray-500">Assalamualaikum</p>
+            </div>
           </div>
 
           {/* Simple Typography */}

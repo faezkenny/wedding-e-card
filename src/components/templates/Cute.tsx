@@ -104,9 +104,18 @@ export default function CuteTemplate({ data, wishes, isPreview }: TemplateProps)
           className="space-y-8 max-w-3xl"
         >
           {/* Premium Arabic Calligraphy */}
-          <div className="mb-8">
-            <ArabicCalligraphy text={IslamicPhrases.mashaAllah} size="large" />
-            <p className="text-sm mt-3 text-[#D4AF37] tracking-widest uppercase">Masha Allah</p>
+          <div className="mb-8 space-y-6">
+            {/* Bismillahirrahmanirrahim */}
+            <div>
+              <ArabicCalligraphy text={IslamicPhrases.bismillah} size="large" />
+              <p className="text-sm mt-3 text-[#D4AF37] tracking-widest uppercase">Bismillahirrahmanirrahim</p>
+            </div>
+            
+            {/* Assalamualaikum */}
+            <div>
+              <ArabicCalligraphy text={IslamicPhrases.assalamualaikum} size="medium" />
+              <p className="text-sm mt-3 text-[#D4AF37] tracking-widest uppercase">Assalamualaikum</p>
+            </div>
           </div>
 
           {/* Luxury Card Design */}

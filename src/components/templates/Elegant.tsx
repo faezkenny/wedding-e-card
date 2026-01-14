@@ -12,7 +12,7 @@ import RSVPForm from '../widgets/RSVPForm';
 import GiftSection from '../widgets/GiftSection';
 import { formatDateLong, formatTime } from '@/lib/date-utils';
 import { BatikFloral, IslamicBorder } from '../patterns/BatikPatterns';
-import { BismillahHeader, IslamicBlessing, IslamicPhrases, ArabicCalligraphy } from '../patterns/ArabicCalligraphy';
+import { IslamicBlessing, IslamicPhrases, ArabicCalligraphy } from '../patterns/ArabicCalligraphy';
 import { CrescentStar } from '../patterns/MalaysianSymbols';
 
 interface TemplateProps {
@@ -109,9 +109,19 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="mb-8"
+          className="mb-8 space-y-6"
         >
-          <BismillahHeader />
+          {/* Bismillahirrahmanirrahim */}
+          <div>
+            <ArabicCalligraphy text={IslamicPhrases.bismillah} size="medium" />
+            <p className="text-xs mt-2 text-[#006B3C] opacity-70">Bismillahirrahmanirrahim</p>
+          </div>
+          
+          {/* Assalamualaikum */}
+          <div>
+            <ArabicCalligraphy text={IslamicPhrases.assalamualaikum} size="small" />
+            <p className="text-xs mt-2 text-[#006B3C] opacity-70">Assalamualaikum</p>
+          </div>
         </motion.div>
 
         <motion.div 
