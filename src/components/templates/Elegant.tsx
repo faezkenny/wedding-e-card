@@ -10,6 +10,7 @@ import MapButtons from '../widgets/MapButtons';
 import WhatsAppButtons from '../widgets/WhatsAppButtons';
 import RSVPForm from '../widgets/RSVPForm';
 import GiftSection from '../widgets/GiftSection';
+import { formatDateLong, formatTime } from '@/lib/date-utils';
 
 interface TemplateProps {
   data: ECardData;
@@ -104,12 +105,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
           </h1>
           <div className="w-12 h-px bg-[#8e735b] mx-auto" />
           <p className="text-xl md:text-2xl italic">
-            {new Date(data.wedding_date).toLocaleDateString('en-MY', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })}
+            {formatDateLong(data.wedding_date)}
           </p>
           
           {/* Countdown Timer */}
@@ -159,11 +155,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
           <div className="space-y-2">
             <h3 className="uppercase tracking-widest text-sm text-[#8e735b]">Time</h3>
             <p className="text-2xl">
-              {new Date(data.wedding_date).toLocaleTimeString('en-MY', { 
-                hour: 'numeric', 
-                minute: '2-digit',
-                hour12: true 
-              })}
+              {formatTime(data.wedding_date)}
             </p>
           </div>
 

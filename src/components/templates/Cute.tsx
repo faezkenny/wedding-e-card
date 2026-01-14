@@ -4,6 +4,7 @@ import { ECardData, Wish } from './types';
 import { motion } from 'framer-motion';
 import { Music, Heart, Sparkles, Star } from 'lucide-react';
 import { useState, useRef } from 'react';
+import { formatDateShort, formatTime } from '@/lib/date-utils';
 
 interface TemplateProps {
   data: ECardData;
@@ -129,11 +130,7 @@ export default function CuteTemplate({ data, wishes, isPreview }: TemplateProps)
           </div>
 
           <p className="text-xl font-medium bg-[#ff7eb9] text-white px-6 py-2 rounded-full inline-block">
-            {new Date(data.wedding_date).toLocaleDateString('en-MY', { 
-              day: 'numeric',
-              month: 'long', 
-              year: 'numeric'
-            })}
+            {formatDateShort(data.wedding_date)}
           </p>
         </motion.div>
       </section>
@@ -154,11 +151,7 @@ export default function CuteTemplate({ data, wishes, isPreview }: TemplateProps)
               <div className="p-4 bg-[#fff5f8] rounded-2xl">
                 <p className="text-sm uppercase font-bold text-[#ffb7d5]">Time</p>
                 <p className="text-2xl font-bold">
-                  {new Date(data.wedding_date).toLocaleTimeString('en-MY', { 
-                    hour: 'numeric', 
-                    minute: '2-digit',
-                    hour12: true 
-                  })}
+                  {formatTime(data.wedding_date)}
                 </p>
               </div>
             </div>

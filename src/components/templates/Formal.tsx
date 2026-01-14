@@ -4,6 +4,7 @@ import { ECardData, Wish } from './types';
 import { motion } from 'framer-motion';
 import { Music, Calendar, MapPin, Clock, MessageSquareQuote } from 'lucide-react';
 import { useState, useRef } from 'react';
+import { formatDateShort, formatTime } from '@/lib/date-utils';
 
 interface TemplateProps {
   data: ECardData;
@@ -97,11 +98,7 @@ export default function FormalTemplate({ data, wishes, isPreview }: TemplateProp
           <div className="flex flex-col items-center gap-2">
             <Calendar className="opacity-50" size={20} />
             <p className="text-2xl tracking-widest">
-              {new Date(data.wedding_date).toLocaleDateString('en-MY', { 
-                day: 'numeric',
-                month: 'long', 
-                year: 'numeric'
-              }).toUpperCase()}
+              {formatDateShort(data.wedding_date).toUpperCase()}
             </p>
           </div>
         </motion.div>
@@ -128,11 +125,7 @@ export default function FormalTemplate({ data, wishes, isPreview }: TemplateProp
             <Clock size={32} strokeWidth={1} />
             <h3 className="text-xl tracking-[0.2em] uppercase">The Time</h3>
             <p className="text-white/80 leading-loose tracking-widest">
-              {new Date(data.wedding_date).toLocaleTimeString('en-MY', { 
-                hour: 'numeric', 
-                minute: '2-digit',
-                hour12: true 
-              }).toUpperCase()}
+              {formatTime(data.wedding_date)}
             </p>
           </motion.div>
         </div>
