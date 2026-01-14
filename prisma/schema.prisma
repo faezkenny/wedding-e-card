@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  name          String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  ecards        ECard[]
+  
+  @@map("users")
+}
+
+model ECard {
+  id            String   @id @default(uuid())
+  ownerId       String   @map("owner_id")
+  brideName     String   @map("bride_name")
+  groomName     String   @map("groom_name")
+  weddingDate   DateTime @map("wedding_date")
+  weddingVenue  String   @map("wedding_venue")
+  musicUrl      String?  @map("music_url")
+  templateType  String   @default("elegant") @map("template_type") // 'cute' | 'elegant' | 'formal'
+  isPaid        Boolean  @default(false) @map("is_paid")
+  slug          String   @unique
+  config        Json?    @default("{}")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  owner         User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  wishes        Wish[]
+  payments      Payment[]
+  
+  @@map("ecards")
+  @@index([ownerId])
+}
+
+model Wish {
+  id            String   @id @default(uuid())
+  ecardId       String   @map("ecard_id")
+  guestName     String   @map("guest_name")
+  message       String
+  createdAt     DateTime @default(now()) @map("created_at")
+  ecard         ECard    @relation(fields: [ecardId], references: [id], onDelete: Cascade)
+  
+  @@map("wishes")
+  @@index([ecardId])
+}
+
+model Payment {
+  id            String   @id @default(uuid())
+  ecardId       String   @map("ecard_id")
+  amount        Decimal  @default(10.00) @db.Decimal(10, 2)
+  currency      String   @default("MYR")
+  status        String   @default("pending") // 'pending' | 'completed' | 'failed'
+  senangPayId   String?  @map("senang_pay_id") // senangPay transaction ID
+  externalId    String?  @map("external_id") // External reference number
+  createdAt     DateTime @default(now()) @map("created_at")
+  ecard         ECard    @relation(fields: [ecardId], references: [id], onDelete: Cascade)
+  
+  @@map("payments")
+  @@index([ecardId])
+  @@index([senangPayId])
+}
