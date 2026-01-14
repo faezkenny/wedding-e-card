@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Heart, Sparkles, Gavel, Save, ExternalLink, Users, Calendar, MapPin, Music2, Image as ImageIcon, Gift, Phone, Plus, X } from 'lucide-react';
+import { Heart, Sparkles, Gavel, Save, ExternalLink, Users, Calendar, MapPin, Music2, Image as ImageIcon, Gift, Phone, Plus, X, BookOpen } from 'lucide-react';
 
 interface CardFormProps {
   initialData?: Partial<ECardData>;
@@ -36,6 +36,11 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
     countdown_date: initialData?.countdown_date || '',
     rsvp_deadline: initialData?.rsvp_deadline || '',
     photo_gallery: initialData?.photo_gallery || [],
+    wali_name: initialData?.wali_name || '',
+    mas_kahwin: initialData?.mas_kahwin || '',
+    akad_nikah_date: initialData?.akad_nikah_date || '',
+    akad_nikah_venue: initialData?.akad_nikah_venue || '',
+    doa_message: initialData?.doa_message || '',
     config: initialData?.config || {},
   });
 
@@ -99,94 +104,123 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
     <Card className="w-full max-w-2xl mx-auto border-none shadow-none lg:shadow-md">
       <CardHeader>
         <CardTitle className="text-2xl font-bold flex items-center gap-2">
-          Customize Your E-Card <Heart className="text-pink-500 fill-pink-500" size={20} />
+          Kustom Kad E-Perkahwinan <Heart className="text-pink-500 fill-pink-500" size={20} />
         </CardTitle>
         <CardDescription>
-          Fill in all your wedding details across different sections.
+          Isi semua butiran perkahwinan anda di bahagian yang berbeza.
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="general" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-6">
-            <TabsTrigger value="general">General</TabsTrigger>
-            <TabsTrigger value="event">Event</TabsTrigger>
-            <TabsTrigger value="location">Location</TabsTrigger>
+        <Tabs defaultValue="umum" className="w-full">
+          <TabsList className="grid w-full grid-cols-6 mb-6">
+            <TabsTrigger value="umum">Umum</TabsTrigger>
+            <TabsTrigger value="akad">Akad Nikah</TabsTrigger>
+            <TabsTrigger value="majlis">Majlis</TabsTrigger>
+            <TabsTrigger value="lokasi">Lokasi</TabsTrigger>
             <TabsTrigger value="media">Media</TabsTrigger>
-            <TabsTrigger value="rsvp-gifts">RSVP & Gifts</TabsTrigger>
+            <TabsTrigger value="hadiah">RSVP & Hadiah</TabsTrigger>
           </TabsList>
 
-          {/* General Tab */}
-          <TabsContent value="general" className="space-y-6">
+          {/* Umum Tab */}
+          <TabsContent value="umum" className="space-y-6">
             <div className="space-y-4">
-              <Label>Choose Template</Label>
+              <Label>Pilih Templat</Label>
               <Tabs defaultValue={formData.template_type} onValueChange={(v) => updateField('template_type', v)}>
                 <TabsList className="grid grid-cols-3 w-full">
-                  <TabsTrigger value="elegant"><Gavel size={16} className="mr-2" /> Elegant</TabsTrigger>
-                  <TabsTrigger value="cute"><Sparkles size={16} className="mr-2" /> Cute</TabsTrigger>
-                  <TabsTrigger value="formal"><Heart size={16} className="mr-2" /> Formal</TabsTrigger>
+                  <TabsTrigger value="elegant"><Gavel size={16} className="mr-2" /> Tradisional</TabsTrigger>
+                  <TabsTrigger value="cute"><Sparkles size={16} className="mr-2" /> Moden Islamik</TabsTrigger>
+                  <TabsTrigger value="formal"><Heart size={16} className="mr-2" /> Klasik Melayu</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="groom_name">Groom's Name</Label>
-                <Input id="groom_name" value={formData.groom_name} onChange={(e) => updateField('groom_name', e.target.value)} placeholder="Ahmad" />
+                <Label htmlFor="groom_name">Nama Pengantin Lelaki</Label>
+                <Input id="groom_name" value={formData.groom_name} onChange={(e) => updateField('groom_name', e.target.value)} placeholder="Ahmad bin Abdullah" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="bride_name">Bride's Name</Label>
-                <Input id="bride_name" value={formData.bride_name} onChange={(e) => updateField('bride_name', e.target.value)} placeholder="Siti" />
+                <Label htmlFor="bride_name">Nama Pengantin Perempuan</Label>
+                <Input id="bride_name" value={formData.bride_name} onChange={(e) => updateField('bride_name', e.target.value)} placeholder="Siti binti Hassan" />
               </div>
             </div>
 
             <div className="space-y-4">
-              <Label>Parents' Names (Optional)</Label>
+              <Label>Nama Ibu Bapa (Pilihan)</Label>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="bride_father" className="text-sm">Bride's Father</Label>
-                  <Input id="bride_father" value={formData.parents_names?.brideFather || ''} onChange={(e) => updateField('parents_names', { ...formData.parents_names, brideFather: e.target.value })} />
+                  <Label htmlFor="bride_father" className="text-sm">Bapa Pengantin Perempuan</Label>
+                  <Input id="bride_father" value={formData.parents_names?.brideFather || ''} onChange={(e) => updateField('parents_names', { ...formData.parents_names, brideFather: e.target.value })} placeholder="Hassan bin Ali" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="bride_mother" className="text-sm">Bride's Mother</Label>
-                  <Input id="bride_mother" value={formData.parents_names?.brideMother || ''} onChange={(e) => updateField('parents_names', { ...formData.parents_names, brideMother: e.target.value })} />
+                  <Label htmlFor="bride_mother" className="text-sm">Ibu Pengantin Perempuan</Label>
+                  <Input id="bride_mother" value={formData.parents_names?.brideMother || ''} onChange={(e) => updateField('parents_names', { ...formData.parents_names, brideMother: e.target.value })} placeholder="Aminah binti Ahmad" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="groom_father" className="text-sm">Groom's Father</Label>
-                  <Input id="groom_father" value={formData.parents_names?.groomFather || ''} onChange={(e) => updateField('parents_names', { ...formData.parents_names, groomFather: e.target.value })} />
+                  <Label htmlFor="groom_father" className="text-sm">Bapa Pengantin Lelaki</Label>
+                  <Input id="groom_father" value={formData.parents_names?.groomFather || ''} onChange={(e) => updateField('parents_names', { ...formData.parents_names, groomFather: e.target.value })} placeholder="Abdullah bin Ismail" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="groom_mother" className="text-sm">Groom's Mother</Label>
-                  <Input id="groom_mother" value={formData.parents_names?.groomMother || ''} onChange={(e) => updateField('parents_names', { ...formData.parents_names, groomMother: e.target.value })} />
+                  <Label htmlFor="groom_mother" className="text-sm">Ibu Pengantin Lelaki</Label>
+                  <Input id="groom_mother" value={formData.parents_names?.groomMother || ''} onChange={(e) => updateField('parents_names', { ...formData.parents_names, groomMother: e.target.value })} placeholder="Fatimah binti Omar" />
                 </div>
               </div>
             </div>
           </TabsContent>
 
-          {/* Event Tab */}
-          <TabsContent value="event" className="space-y-6">
+          {/* Akad Nikah Tab */}
+          <TabsContent value="akad" className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="wedding_date">Wedding Date & Time</Label>
+              <Label htmlFor="akad_nikah_date">Tarikh & Masa Akad Nikah</Label>
+              <Input id="akad_nikah_date" type="datetime-local" value={formData.akad_nikah_date ? new Date(formData.akad_nikah_date).toISOString().slice(0, 16) : ''} onChange={(e) => updateField('akad_nikah_date', e.target.value ? new Date(e.target.value).toISOString() : '')} />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="akad_nikah_venue">Tempat Akad Nikah</Label>
+              <Textarea id="akad_nikah_venue" value={formData.akad_nikah_venue || ''} onChange={(e) => updateField('akad_nikah_venue', e.target.value)} rows={3} placeholder="Masjid atau rumah..." />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="wali_name">Nama Wali</Label>
+              <Input id="wali_name" value={formData.wali_name || ''} onChange={(e) => updateField('wali_name', e.target.value)} placeholder="Hassan bin Ali" />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="mas_kahwin">Mas Kahwin</Label>
+              <Input id="mas_kahwin" value={formData.mas_kahwin || ''} onChange={(e) => updateField('mas_kahwin', e.target.value)} placeholder="RM 500.00" />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="doa_message">Doa / Ijab Kabul (Pilihan)</Label>
+              <Textarea id="doa_message" value={formData.doa_message || ''} onChange={(e) => updateField('doa_message', e.target.value)} rows={4} placeholder="Masukkan doa atau mesej khas..." />
+            </div>
+          </TabsContent>
+
+          {/* Majlis Tab */}
+          <TabsContent value="majlis" className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="wedding_date">Tarikh & Masa Majlis Resepsi</Label>
               <Input id="wedding_date" type="datetime-local" value={formData.wedding_date.slice(0, 16)} onChange={(e) => updateField('wedding_date', new Date(e.target.value).toISOString())} />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="wedding_venue">Venue Address</Label>
-              <Textarea id="wedding_venue" value={formData.wedding_venue} onChange={(e) => updateField('wedding_venue', e.target.value)} rows={3} placeholder="Grand Ballroom, Hotel..." />
+              <Label htmlFor="wedding_venue">Alamat Tempat Majlis</Label>
+              <Textarea id="wedding_venue" value={formData.wedding_venue} onChange={(e) => updateField('wedding_venue', e.target.value)} rows={3} placeholder="Dewan atau hotel..." />
             </div>
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <Label>Event Itinerary</Label>
+                <Label>Jadual Acara</Label>
                 <Button type="button" variant="outline" size="sm" onClick={addItineraryItem}>
-                  <Plus className="h-4 w-4 mr-1" /> Add Event
+                  <Plus className="h-4 w-4 mr-1" /> Tambah Acara
                 </Button>
               </div>
               {(formData.itinerary || []).map((item, index) => (
                 <div key={index} className="flex gap-2 p-3 border rounded-lg">
                   <div className="flex-1 grid grid-cols-3 gap-2">
-                    <Input placeholder="Event Title" value={item.title} onChange={(e) => updateItineraryItem(index, 'title', e.target.value)} />
-                    <Input placeholder="Time (e.g., 2:00 PM)" value={item.time} onChange={(e) => updateItineraryItem(index, 'time', e.target.value)} />
-                    <Input placeholder="Description" value={item.description || ''} onChange={(e) => updateItineraryItem(index, 'description', e.target.value)} />
+                    <Input placeholder="Tajuk Acara" value={item.title} onChange={(e) => updateItineraryItem(index, 'title', e.target.value)} />
+                    <Input placeholder="Masa (cth: 2:00 PM)" value={item.time} onChange={(e) => updateItineraryItem(index, 'time', e.target.value)} />
+                    <Input placeholder="Penerangan" value={item.description || ''} onChange={(e) => updateItineraryItem(index, 'description', e.target.value)} />
                   </div>
                   <Button type="button" variant="ghost" size="sm" onClick={() => removeItineraryItem(index)}>
                     <X className="h-4 w-4" />
@@ -196,8 +230,8 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
             </div>
           </TabsContent>
 
-          {/* Location Tab */}
-          <TabsContent value="location" className="space-y-6">
+          {/* Lokasi Tab */}
+          <TabsContent value="lokasi" className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="google_maps_url">Google Maps URL</Label>
               <Input id="google_maps_url" value={formData.google_maps_url || ''} onChange={(e) => updateField('google_maps_url', e.target.value)} placeholder="https://maps.google.com/..." />
@@ -211,20 +245,20 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
           {/* Media Tab */}
           <TabsContent value="media" className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="music_url">Background Music URL (Direct MP3 link)</Label>
-              <Input id="music_url" value={formData.music_url || ''} onChange={(e) => updateField('music_url', e.target.value)} placeholder="https://example.com/song.mp3" />
+              <Label htmlFor="music_url">URL Muzik Latar (Pautan MP3 terus)</Label>
+              <Input id="music_url" value={formData.music_url || ''} onChange={(e) => updateField('music_url', e.target.value)} placeholder="https://example.com/lagu.mp3" />
             </div>
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <Label>Photo Gallery</Label>
+                <Label>Galeri Foto</Label>
                 <Button type="button" variant="outline" size="sm" onClick={addPhotoUrl}>
-                  <Plus className="h-4 w-4 mr-1" /> Add Photo
+                  <Plus className="h-4 w-4 mr-1" /> Tambah Foto
                 </Button>
               </div>
               {(formData.photo_gallery || []).map((url, index) => (
                 <div key={index} className="flex gap-2">
-                  <Input placeholder="Photo URL" value={url} onChange={(e) => updatePhotoUrl(index, e.target.value)} />
+                  <Input placeholder="URL Foto" value={url} onChange={(e) => updatePhotoUrl(index, e.target.value)} />
                   <Button type="button" variant="ghost" size="sm" onClick={() => removePhotoUrl(index)}>
                     <X className="h-4 w-4" />
                   </Button>
@@ -233,30 +267,30 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
             </div>
           </TabsContent>
 
-          {/* RSVP & Gifts Tab */}
-          <TabsContent value="rsvp-gifts" className="space-y-6">
+          {/* RSVP & Hadiah Tab */}
+          <TabsContent value="hadiah" className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="countdown_date">Countdown Target Date</Label>
+              <Label htmlFor="countdown_date">Tarikh Sasaran Kiraan Masa</Label>
               <Input id="countdown_date" type="datetime-local" value={formData.countdown_date ? new Date(formData.countdown_date).toISOString().slice(0, 16) : ''} onChange={(e) => updateField('countdown_date', e.target.value ? new Date(e.target.value).toISOString() : '')} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="rsvp_deadline">RSVP Deadline</Label>
+              <Label htmlFor="rsvp_deadline">Tarikh Tutup RSVP</Label>
               <Input id="rsvp_deadline" type="datetime-local" value={formData.rsvp_deadline ? new Date(formData.rsvp_deadline).toISOString().slice(0, 16) : ''} onChange={(e) => updateField('rsvp_deadline', e.target.value ? new Date(e.target.value).toISOString() : '')} />
             </div>
 
             <div className="space-y-4">
-              <Label>Contact Information</Label>
+              <Label>Maklumat Hubungan</Label>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-gray-600">For WhatsApp buttons</span>
+                <span className="text-sm text-gray-600">Untuk butang WhatsApp</span>
                 <Button type="button" variant="outline" size="sm" onClick={addContactInfo}>
-                  <Plus className="h-4 w-4 mr-1" /> Add Contact
+                  <Plus className="h-4 w-4 mr-1" /> Tambah Hubungan
                 </Button>
               </div>
               {(formData.contact_info || []).map((contact, index) => (
                 <div key={index} className="flex gap-2 p-3 border rounded-lg">
                   <div className="flex-1 grid grid-cols-3 gap-2">
-                    <Input placeholder="Name" value={contact.name} onChange={(e) => updateContactInfo(index, 'name', e.target.value)} />
-                    <Input placeholder="Phone" value={contact.phone || ''} onChange={(e) => updateContactInfo(index, 'phone', e.target.value)} />
+                    <Input placeholder="Nama" value={contact.name} onChange={(e) => updateContactInfo(index, 'name', e.target.value)} />
+                    <Input placeholder="Telefon" value={contact.phone || ''} onChange={(e) => updateContactInfo(index, 'phone', e.target.value)} />
                     <Input placeholder="WhatsApp" value={contact.whatsapp || ''} onChange={(e) => updateContactInfo(index, 'whatsapp', e.target.value)} />
                   </div>
                   <Button type="button" variant="ghost" size="sm" onClick={() => removeContactInfo(index)}>
@@ -267,18 +301,18 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
             </div>
 
             <div className="space-y-4 border-t pt-4">
-              <Label>Monetary Gift Details</Label>
+              <Label>Butiran Hadiah Wang</Label>
               <div className="space-y-2">
-                <Label htmlFor="gift_bank_name" className="text-sm">Bank Name</Label>
+                <Label htmlFor="gift_bank_name" className="text-sm">Nama Bank</Label>
                 <Input id="gift_bank_name" value={formData.gift_bank_name || ''} onChange={(e) => updateField('gift_bank_name', e.target.value)} placeholder="Maybank" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="gift_account_no" className="text-sm">Account Number</Label>
+                <Label htmlFor="gift_account_no" className="text-sm">Nombor Akaun</Label>
                 <Input id="gift_account_no" value={formData.gift_account_no || ''} onChange={(e) => updateField('gift_account_no', e.target.value)} placeholder="1234567890" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="gift_qr_url" className="text-sm">QR Code Image URL</Label>
-                <Input id="gift_qr_url" value={formData.gift_qr_url || ''} onChange={(e) => updateField('gift_qr_url', e.target.value)} placeholder="https://example.com/qr-code.jpg" />
+                <Label htmlFor="gift_qr_url" className="text-sm">URL Imej Kod QR</Label>
+                <Input id="gift_qr_url" value={formData.gift_qr_url || ''} onChange={(e) => updateField('gift_qr_url', e.target.value)} placeholder="https://example.com/kod-qr.jpg" />
               </div>
             </div>
           </TabsContent>
@@ -286,7 +320,7 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
 
         <div className="pt-6 border-t mt-6 flex flex-col gap-3">
           <Button onClick={() => onSave(formData)} className="w-full bg-pink-600 hover:bg-pink-700">
-            <Save className="mr-2" size={18} /> Save Progress
+            <Save className="mr-2" size={18} /> Simpan Kemajuan
           </Button>
           {!formData.is_paid && (
             <Button 
@@ -294,7 +328,7 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
               className="w-full border-pink-200 text-pink-700 hover:bg-pink-50"
               onClick={async () => {
                 if (!formData.id) {
-                  alert('Please save your card first before unlocking.');
+                  alert('Sila simpan kad anda terlebih dahulu sebelum membuka.');
                   return;
                 }
                 try {
@@ -309,11 +343,11 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
                   }
                 } catch (error) {
                   console.error('Payment error:', error);
-                  alert('Failed to initiate payment. Please try again.');
+                  alert('Gagal memulakan pembayaran. Sila cuba lagi.');
                 }
               }}
             >
-              <ExternalLink className="mr-2" size={18} /> Unlock Public Card (RM10)
+              <ExternalLink className="mr-2" size={18} /> Buka Kad Awam (RM10)
             </Button>
           )}
         </div>

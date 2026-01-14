@@ -2,124 +2,144 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Heart, Calendar, MapPin, Music, MessageSquare, Clock, Image, Users, Gift, Phone, CheckCircle2 } from 'lucide-react';
+import { BatikFloral } from '@/components/patterns/BatikPatterns';
+import { BismillahHeader } from '@/components/patterns/ArabicCalligraphy';
+import { BungaRaya, CrescentStar } from '@/components/patterns/MalaysianSymbols';
 
 export default function Home() {
   const features = [
     {
       icon: <Users className="w-8 h-8" />,
-      title: 'RSVP Management',
-      description: 'Track guest attendance with intelligent RSVP system',
+      title: 'Sistem RSVP',
+      description: 'Urus kehadiran tetamu dengan sistem RSVP yang pintar',
     },
     {
       icon: <Clock className="w-8 h-8" />,
-      title: 'Countdown Timer',
-      description: 'Build excitement with a real-time countdown to your special day',
+      title: 'Kiraan Masa',
+      description: 'Bangunkan keseronokan dengan kiraan masa masa nyata ke hari istimewa anda',
     },
     {
       icon: <MapPin className="w-8 h-8" />,
-      title: 'Maps Integration',
-      description: 'Easy directions with Google Maps and Waze links',
+      title: 'Integrasi Peta',
+      description: 'Arahan mudah dengan pautan Google Maps dan Waze',
     },
     {
       icon: <Music className="w-8 h-8" />,
-      title: 'Background Music',
-      description: 'Add your favorite song to enhance the invitation experience',
+      title: 'Muzik Latar',
+      description: 'Tambah lagu kegemaran anda untuk meningkatkan pengalaman jemputan',
     },
     {
       icon: <MessageSquare className="w-8 h-8" />,
-      title: 'Guestbook',
-      description: 'Let guests leave heartfelt wishes and messages',
+      title: 'Buku Ucapan',
+      description: 'Biarkan tetamu meninggalkan doa dan ucapan ikhlas',
     },
     {
       icon: <Calendar className="w-8 h-8" />,
-      title: 'Event Itinerary',
-      description: 'Share detailed schedule to help guests plan their visit',
+      title: 'Jadual Acara',
+      description: 'Kongsi jadual terperinci untuk membantu tetamu merancang lawatan mereka',
     },
     {
       icon: <Image className="w-8 h-8" />,
-      title: 'Photo Gallery',
-      description: 'Showcase memorable photos and previews',
+      title: 'Galeri Foto',
+      description: 'Pamerkan foto kenangan dan pratonton',
     },
     {
       icon: <Gift className="w-8 h-8" />,
-      title: 'Monetary Gifts',
-      description: 'Share bank details and QR codes for easy gifting',
+      title: 'Hadiah Wang',
+      description: 'Kongsi butiran bank dan kod QR untuk hadiah yang mudah',
     },
   ];
 
   const templates = [
     {
-      name: 'Elegant',
-      description: 'Minimalist design with sophisticated typography',
-      color: 'bg-gradient-to-br from-amber-50 to-amber-100',
+      name: 'Tradisional',
+      description: 'Reka bentuk tradisional dengan corak batik dan khat Arab',
+      color: 'bg-gradient-to-br from-amber-50 via-green-50 to-amber-100',
       preview: '/templates/elegant-preview.jpg',
     },
     {
-      name: 'Cute',
-      description: 'Playful colors with floating hearts and animations',
+      name: 'Moden Islamik',
+      description: 'Warna lembut dengan corak batik bunga dan motif Islamik',
       color: 'bg-gradient-to-br from-pink-50 to-pink-100',
       preview: '/templates/cute-preview.jpg',
     },
     {
-      name: 'Formal',
-      description: 'Classic structure with bold gold accents',
-      color: 'bg-gradient-to-br from-slate-50 to-slate-100',
+      name: 'Klasik Melayu',
+      description: 'Struktur klasik dengan corak songket dan aksen emas berani',
+      color: 'bg-gradient-to-br from-red-50 via-amber-50 to-red-100',
       preview: '/templates/formal-preview.jpg',
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-[#F5F5DC] to-[#FFF8DC] relative overflow-hidden">
+      {/* Background Batik Pattern */}
+      <div className="fixed inset-0 opacity-5 pointer-events-none z-0">
+        <BatikFloral color="#D4AF37" opacity={0.1} className="w-full h-full" />
+      </div>
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-white to-amber-50 py-20 px-4 sm:py-32">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#F5F5DC] via-white to-[#FFF0F5] py-20 px-4 sm:py-32 z-10">
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
-            <Badge className="mb-4 bg-pink-100 text-pink-700 hover:bg-pink-100">
-              <Heart className="mr-1 h-3 w-3 fill-pink-700" />
-              Digital Wedding Invitations
+            {/* Bismillah */}
+            <div className="mb-6">
+              <BismillahHeader />
+            </div>
+
+            <Badge className="mb-4 bg-gradient-to-r from-[#006B3C] to-[#D4AF37] text-white hover:from-[#004d2a] hover:to-[#B8941F]">
+              <Heart className="mr-1 h-3 w-3 fill-white" />
+              Kad Jemputan Perkahwinan Digital
             </Badge>
             <h1 className="mb-6 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Create Beautiful
-              <span className="bg-gradient-to-r from-pink-600 to-amber-600 bg-clip-text text-transparent"> Wedding E-Cards</span>
+              Cipta Kad E-Perkahwinan
+              <span className="bg-gradient-to-r from-[#006B3C] to-[#D4AF37] bg-clip-text text-transparent"> Yang Cantik</span>
             </h1>
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600 sm:text-xl">
-              Share your special day with elegant, customizable digital invitations. 
-              Include RSVP, maps, music, and more—all in one beautiful card.
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-700 sm:text-xl">
+              Kongsi hari istimewa anda dengan jemputan digital yang elegan dan boleh disesuaikan. 
+              Termasuk RSVP, peta, muzik, dan banyak lagi—semua dalam satu kad yang cantik.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button asChild size="lg" className="bg-gradient-to-r from-pink-600 to-amber-600 hover:from-pink-700 hover:to-amber-700">
+              <Button asChild size="lg" className="bg-gradient-to-r from-[#006B3C] to-[#004d2a] hover:from-[#004d2a] hover:to-[#006B3C] text-white">
                 <Link href="/dashboard">
-                  Create Your E-Card Now
+                  Cipta Kad E-Card Anda Sekarang
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg">
+              <Button asChild variant="outline" size="lg" className="border-[#006B3C] text-[#006B3C] hover:bg-[#006B3C] hover:text-white">
                 <Link href="#features">
-                  Explore Features
+                  Terokai Ciri-ciri
                 </Link>
               </Button>
+            </div>
+            
+            {/* Decorative Elements */}
+            <div className="flex justify-center gap-4 mt-8">
+              <BungaRaya size={30} color="#D4AF37" />
+              <CrescentStar size={30} color="#006B3C" />
+              <BungaRaya size={30} color="#D4AF37" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-4">
+      <section id="features" className="py-20 px-4 relative z-10">
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-              Everything You Need
+              Semua Yang Anda Perlukan
             </h2>
             <p className="text-lg text-gray-600">
-              All the features you need to create a memorable digital invitation
+              Semua ciri yang anda perlukan untuk mencipta jemputan digital yang tidak dapat dilupakan
             </p>
           </div>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-lg hover:border-pink-200"
+                className="group rounded-2xl border-2 border-[#D4AF37]/30 bg-white p-6 shadow-sm transition-all hover:shadow-lg hover:border-[#006B3C]"
               >
-                <div className="mb-4 text-pink-600 group-hover:text-pink-700">
+                <div className="mb-4 text-[#006B3C] group-hover:text-[#D4AF37]">
                   {feature.icon}
                 </div>
                 <h3 className="mb-2 text-lg font-semibold text-gray-900">
@@ -135,24 +155,26 @@ export default function Home() {
       </section>
 
       {/* Templates Section */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-20 px-4 bg-white relative z-10">
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-              Choose Your Style
+              Pilih Gaya Anda
             </h2>
             <p className="text-lg text-gray-600">
-              Three beautiful templates to match your wedding theme
+              Tiga templat cantik untuk sepadan dengan tema perkahwinan anda
             </p>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             {templates.map((template, index) => (
               <div
                 key={index}
-                className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-xl"
+                className="group overflow-hidden rounded-2xl border-2 border-[#D4AF37]/30 bg-white shadow-sm transition-all hover:shadow-xl hover:border-[#006B3C]"
               >
-                <div className={`h-48 ${template.color} flex items-center justify-center`}>
-                  <Heart className="h-16 w-16 text-white opacity-50" />
+                <div className={`h-48 ${template.color} flex items-center justify-center relative`}>
+                  {index === 0 && <BungaRaya size={60} color="#D4AF37" />}
+                  {index === 1 && <Heart className="h-16 w-16 text-pink-400 fill-pink-400" />}
+                  {index === 2 && <CrescentStar size={60} color="#FFD700" />}
                 </div>
                 <div className="p-6">
                   <h3 className="mb-2 text-xl font-semibold text-gray-900">
@@ -161,9 +183,9 @@ export default function Home() {
                   <p className="mb-4 text-sm text-gray-600">
                     {template.description}
                   </p>
-                  <Button asChild variant="outline" className="w-full">
-                    <Link href={`/dashboard?template=${template.name.toLowerCase()}`}>
-                      Preview Template
+                  <Button asChild variant="outline" className="w-full border-[#006B3C] text-[#006B3C] hover:bg-[#006B3C] hover:text-white">
+                    <Link href={`/dashboard?template=${index === 0 ? 'elegant' : index === 1 ? 'cute' : 'formal'}`}>
+                      Pratonton Templat
                     </Link>
                   </Button>
                 </div>
@@ -174,55 +196,55 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-pink-50 to-amber-50">
+      <section className="py-20 px-4 bg-gradient-to-br from-[#F5F5DC] to-[#FFF8DC] relative z-10">
         <div className="mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-              Simple, Affordable Pricing
+              Harga Mudah & Berpatutan
             </h2>
             <p className="text-lg text-gray-600">
-              One-time payment. Lifetime access to your E-Card.
+              Pembayaran sekali. Akses seumur hidup ke Kad E-Card anda.
             </p>
           </div>
-          <div className="rounded-2xl border-2 border-pink-200 bg-white p-8 shadow-xl">
+          <div className="rounded-2xl border-4 border-[#D4AF37] bg-white p-8 shadow-xl">
             <div className="text-center">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-pink-100 px-4 py-2">
-                <Badge className="bg-pink-600">Most Popular</Badge>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#006B3C] to-[#D4AF37] px-4 py-2">
+                <Badge className="bg-white text-[#006B3C]">Paling Popular</Badge>
               </div>
               <div className="mb-6">
                 <span className="text-5xl font-bold text-gray-900">RM 10</span>
-                <span className="text-gray-600"> one-time</span>
+                <span className="text-gray-600"> sekali bayar</span>
               </div>
               <h3 className="mb-6 text-2xl font-semibold text-gray-900">
-                Full Access Package
+                Pakej Akses Penuh
               </h3>
               <ul className="mb-8 space-y-3 text-left">
                 {[
-                  'Unlimited edits to your E-Card',
-                  'Public shareable link',
-                  'RSVP management system',
-                  'Guestbook for wishes',
-                  'Countdown timer',
-                  'Maps integration (Google Maps & Waze)',
-                  'Background music',
-                  'Event itinerary',
-                  'Photo gallery',
-                  'Monetary gift section',
-                  'WhatsApp contact buttons',
+                  'Suntingan tanpa had pada Kad E-Card anda',
+                  'Pautan boleh dikongsi secara awam',
+                  'Sistem pengurusan RSVP',
+                  'Buku ucapan untuk doa',
+                  'Kiraan masa',
+                  'Integrasi peta (Google Maps & Waze)',
+                  'Muzik latar',
+                  'Jadual acara',
+                  'Galeri foto',
+                  'Bahagian hadiah wang',
+                  'Butang hubungan WhatsApp',
                 ].map((feature, index) => (
                   <li key={index} className="flex items-center gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-pink-600" />
+                    <CheckCircle2 className="h-5 w-5 text-[#006B3C]" />
                     <span className="text-gray-700">{feature}</span>
                   </li>
                 ))}
               </ul>
-              <Button asChild size="lg" className="w-full bg-gradient-to-r from-pink-600 to-amber-600 hover:from-pink-700 hover:to-amber-700">
+              <Button asChild size="lg" className="w-full bg-gradient-to-r from-[#006B3C] to-[#004d2a] hover:from-[#004d2a] hover:to-[#006B3C] text-white">
                 <Link href="/dashboard">
-                  Get Started Now
+                  Mula Sekarang
                 </Link>
               </Button>
               <p className="mt-4 text-sm text-gray-500">
-                No hidden fees. No subscription. Pay once, use forever.
+                Tiada yuran tersembunyi. Tiada langganan. Bayar sekali, gunakan selama-lamanya.
               </p>
             </div>
           </div>
@@ -230,17 +252,17 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 relative z-10">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-            Ready to Create Your E-Card?
+            Bersedia untuk Mencipta Kad E-Card Anda?
           </h2>
           <p className="mb-8 text-lg text-gray-600">
-            Start customizing your beautiful wedding invitation in minutes
+            Mula menyesuaikan jemputan perkahwinan cantik anda dalam beberapa minit
           </p>
-          <Button asChild size="lg" className="bg-gradient-to-r from-pink-600 to-amber-600 hover:from-pink-700 hover:to-amber-700">
+          <Button asChild size="lg" className="bg-gradient-to-r from-[#006B3C] to-[#004d2a] hover:from-[#004d2a] hover:to-[#006B3C] text-white">
             <Link href="/dashboard">
-              Create Your E-Card Now
+              Cipta Kad E-Card Anda Sekarang
             </Link>
           </Button>
         </div>

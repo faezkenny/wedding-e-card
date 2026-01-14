@@ -37,6 +37,12 @@ export interface ECardData {
   countdown_date?: string;
   rsvp_deadline?: string;
   photo_gallery?: string[];
+  // Islamic fields
+  wali_name?: string; // Wali name
+  mas_kahwin?: string; // Dowry amount
+  akad_nikah_date?: string; // Akad Nikah date/time
+  akad_nikah_venue?: string; // Akad Nikah venue
+  doa_message?: string; // Custom doa/prayer message
   config?: {
     primary_color?: string;
     secondary_color?: string;
