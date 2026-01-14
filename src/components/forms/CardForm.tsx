@@ -104,10 +104,10 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
     <Card className="w-full max-w-2xl mx-auto border-none shadow-none lg:shadow-md">
       <CardHeader>
         <CardTitle className="text-2xl font-bold flex items-center gap-2">
-          Kustom Kad E-Perkahwinan <Heart className="text-pink-500 fill-pink-500" size={20} />
+          Edit Kad Digital <Heart className="text-pink-500 fill-pink-500" size={20} />
         </CardTitle>
         <CardDescription>
-          Isi semua butiran perkahwinan anda di bahagian yang berbeza.
+          Lengkapkan semua maklumat perkahwinan anda.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -116,15 +116,15 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
             <TabsTrigger value="umum">Umum</TabsTrigger>
             <TabsTrigger value="akad">Akad Nikah</TabsTrigger>
             <TabsTrigger value="majlis">Majlis</TabsTrigger>
-            <TabsTrigger value="lokasi">Lokasi</TabsTrigger>
+            <TabsTrigger value="lokasi">Location</TabsTrigger>
             <TabsTrigger value="media">Media</TabsTrigger>
-            <TabsTrigger value="hadiah">RSVP & Hadiah</TabsTrigger>
+            <TabsTrigger value="hadiah">RSVP & Gift</TabsTrigger>
           </TabsList>
 
           {/* Umum Tab */}
           <TabsContent value="umum" className="space-y-6">
             <div className="space-y-4">
-              <Label>Pilih Templat</Label>
+              <Label>Pilih Design</Label>
               <Tabs defaultValue={formData.template_type} onValueChange={(v) => updateField('template_type', v)}>
                 <TabsList className="grid grid-cols-3 w-full">
                   <TabsTrigger value="elegant"><Gavel size={16} className="mr-2" /> Tradisional</TabsTrigger>
@@ -191,26 +191,26 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="doa_message">Doa / Ijab Kabul (Pilihan)</Label>
-              <Textarea id="doa_message" value={formData.doa_message || ''} onChange={(e) => updateField('doa_message', e.target.value)} rows={4} placeholder="Masukkan doa atau mesej khas..." />
+              <Label htmlFor="doa_message">Mesej Khas (Pilihan)</Label>
+              <Textarea id="doa_message" value={formData.doa_message || ''} onChange={(e) => updateField('doa_message', e.target.value)} rows={4} placeholder="Masukkan mesej khas atau doa..." />
             </div>
           </TabsContent>
 
           {/* Majlis Tab */}
           <TabsContent value="majlis" className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="wedding_date">Tarikh & Masa Majlis Resepsi</Label>
+              <Label htmlFor="wedding_date">Tarikh & Masa</Label>
               <Input id="wedding_date" type="datetime-local" value={formData.wedding_date.slice(0, 16)} onChange={(e) => updateField('wedding_date', new Date(e.target.value).toISOString())} />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="wedding_venue">Alamat Tempat Majlis</Label>
+              <Label htmlFor="wedding_venue">Tempat</Label>
               <Textarea id="wedding_venue" value={formData.wedding_venue} onChange={(e) => updateField('wedding_venue', e.target.value)} rows={3} placeholder="Dewan atau hotel..." />
             </div>
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <Label>Jadual Acara</Label>
+                <Label>Aturcara Majlis</Label>
                 <Button type="button" variant="outline" size="sm" onClick={addItineraryItem}>
                   <Plus className="h-4 w-4 mr-1" /> Tambah Acara
                 </Button>
@@ -245,13 +245,13 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
           {/* Media Tab */}
           <TabsContent value="media" className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="music_url">URL Muzik Latar (Pautan MP3 terus)</Label>
+              <Label htmlFor="music_url">Background Music URL</Label>
               <Input id="music_url" value={formData.music_url || ''} onChange={(e) => updateField('music_url', e.target.value)} placeholder="https://example.com/lagu.mp3" />
             </div>
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <Label>Galeri Foto</Label>
+                <Label>Galeri</Label>
                 <Button type="button" variant="outline" size="sm" onClick={addPhotoUrl}>
                   <Plus className="h-4 w-4 mr-1" /> Tambah Foto
                 </Button>
@@ -270,16 +270,16 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
           {/* RSVP & Hadiah Tab */}
           <TabsContent value="hadiah" className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="countdown_date">Tarikh Sasaran Kiraan Masa</Label>
+              <Label htmlFor="countdown_date">Countdown Date</Label>
               <Input id="countdown_date" type="datetime-local" value={formData.countdown_date ? new Date(formData.countdown_date).toISOString().slice(0, 16) : ''} onChange={(e) => updateField('countdown_date', e.target.value ? new Date(e.target.value).toISOString() : '')} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="rsvp_deadline">Tarikh Tutup RSVP</Label>
+              <Label htmlFor="rsvp_deadline">RSVP Deadline</Label>
               <Input id="rsvp_deadline" type="datetime-local" value={formData.rsvp_deadline ? new Date(formData.rsvp_deadline).toISOString().slice(0, 16) : ''} onChange={(e) => updateField('rsvp_deadline', e.target.value ? new Date(e.target.value).toISOString() : '')} />
             </div>
 
             <div className="space-y-4">
-              <Label>Maklumat Hubungan</Label>
+              <Label>Contact</Label>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-gray-600">Untuk butang WhatsApp</span>
                 <Button type="button" variant="outline" size="sm" onClick={addContactInfo}>
@@ -301,7 +301,7 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
             </div>
 
             <div className="space-y-4 border-t pt-4">
-              <Label>Butiran Hadiah Wang</Label>
+              <Label>Money Gift</Label>
               <div className="space-y-2">
                 <Label htmlFor="gift_bank_name" className="text-sm">Nama Bank</Label>
                 <Input id="gift_bank_name" value={formData.gift_bank_name || ''} onChange={(e) => updateField('gift_bank_name', e.target.value)} placeholder="Maybank" />
@@ -319,8 +319,8 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
         </Tabs>
 
         <div className="pt-6 border-t mt-6 flex flex-col gap-3">
-          <Button onClick={() => onSave(formData)} className="w-full bg-pink-600 hover:bg-pink-700">
-            <Save className="mr-2" size={18} /> Simpan Kemajuan
+            <Button onClick={() => onSave(formData)} className="w-full bg-pink-600 hover:bg-pink-700">
+            <Save className="mr-2" size={18} /> Simpan
           </Button>
           {!formData.is_paid && (
             <Button 

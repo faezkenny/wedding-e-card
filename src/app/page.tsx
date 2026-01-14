@@ -15,7 +15,7 @@ export default function Home() {
     },
     {
       icon: <Clock className="w-8 h-8" />,
-      title: 'Kiraan Masa',
+      title: 'Countdown Timer',
       description: 'Bangunkan keseronokan dengan kiraan masa masa nyata ke hari istimewa anda',
     },
     {
@@ -30,12 +30,12 @@ export default function Home() {
     },
     {
       icon: <MessageSquare className="w-8 h-8" />,
-      title: 'Buku Ucapan',
-      description: 'Biarkan tetamu meninggalkan doa dan ucapan ikhlas',
+      title: 'Guestbook',
+      description: 'Biarkan tetamu meninggalkan ucapan ikhlas',
     },
     {
       icon: <Calendar className="w-8 h-8" />,
-      title: 'Jadual Acara',
+      title: 'Aturcara Majlis',
       description: 'Kongsi jadual terperinci untuk membantu tetamu merancang lawatan mereka',
     },
     {
@@ -45,7 +45,7 @@ export default function Home() {
     },
     {
       icon: <Gift className="w-8 h-8" />,
-      title: 'Hadiah Wang',
+      title: 'Money Gift',
       description: 'Kongsi butiran bank dan kod QR untuk hadiah yang mudah',
     },
   ];
@@ -89,15 +89,15 @@ export default function Home() {
 
             <Badge className="mb-4 bg-gradient-to-r from-[#006B3C] to-[#D4AF37] text-white hover:from-[#004d2a] hover:to-[#B8941F]">
               <Heart className="mr-1 h-3 w-3 fill-white" />
-              Kad Jemputan Perkahwinan Digital
+              Kad Kahwin Digital Murah & Canggih
             </Badge>
             <h1 className="mb-6 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Cipta Kad E-Perkahwinan
-              <span className="bg-gradient-to-r from-[#006B3C] to-[#D4AF37] bg-clip-text text-transparent"> Yang Cantik</span>
+              Kad Kahwin Digital
+              <span className="bg-gradient-to-r from-[#006B3C] to-[#D4AF37] bg-clip-text text-transparent"> Murah & Canggih</span>
             </h1>
             <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-700 sm:text-xl">
-              Kongsi hari istimewa anda dengan jemputan digital yang elegan dan boleh disesuaikan. 
-              Termasuk RSVP, peta, muzik, dan banyak lagi—semua dalam satu kad yang cantik.
+              Mempunyai fungsi canggih seperti RSVP, Guestbook, Musik, Galeri Foto, Money Gift, Navigasi, dan Kalendar. 
+              Sesuai untuk majlis perkahwinan, persandingan, pernikahan, pertunangan, kesyukuran, dan aqiqah.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button asChild size="lg" className="bg-gradient-to-r from-[#006B3C] to-[#004d2a] hover:from-[#004d2a] hover:to-[#006B3C] text-white">
@@ -159,35 +159,59 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <h2 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-              Pilih Gaya Anda
+              Pilih Design Kad Digital Anda
             </h2>
             <p className="text-lg text-gray-600">
-              Tiga templat cantik untuk sepadan dengan tema perkahwinan anda
+              Lebih 3 pilihan design yang cantik dan moden
             </p>
           </div>
-          <div className="grid gap-8 md:grid-cols-3">
+          
+          {/* Category Filter */}
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            <Badge className="bg-[#006B3C] text-white hover:bg-[#004d2a] cursor-pointer">Semua</Badge>
+            <Badge variant="outline" className="cursor-pointer hover:bg-gray-100">Tradisional</Badge>
+            <Badge variant="outline" className="cursor-pointer hover:bg-gray-100">Moden</Badge>
+            <Badge variant="outline" className="cursor-pointer hover:bg-gray-100">Klasik</Badge>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
             {templates.map((template, index) => (
               <div
                 key={index}
-                className="group overflow-hidden rounded-2xl border-2 border-[#D4AF37]/30 bg-white shadow-sm transition-all hover:shadow-xl hover:border-[#006B3C]"
+                className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-lg hover:border-[#006B3C]"
               >
-                <div className={`h-48 ${template.color} flex items-center justify-center relative`}>
+                <div className={`h-56 ${template.color} flex items-center justify-center relative overflow-hidden`}>
                   {index === 0 && <BungaRaya size={60} color="#D4AF37" />}
                   {index === 1 && <Heart className="h-16 w-16 text-pink-400 fill-pink-400" />}
                   {index === 2 && <CrescentStar size={60} color="#FFD700" />}
+                  <div className="absolute top-2 right-2">
+                    <Badge className="bg-white/90 text-[#006B3C] text-xs">POPULAR</Badge>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="mb-2 text-xl font-semibold text-gray-900">
-                    {template.name}
-                  </h3>
-                  <p className="mb-4 text-sm text-gray-600">
+                <div className="p-5">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {template.name}
+                    </h3>
+                    <Badge variant="outline" className="text-xs">
+                      {index === 0 ? 'Tradisional' : index === 1 ? 'Moden' : 'Klasik'}
+                    </Badge>
+                  </div>
+                  <p className="mb-4 text-sm text-gray-600 line-clamp-2">
                     {template.description}
                   </p>
-                  <Button asChild variant="outline" className="w-full border-[#006B3C] text-[#006B3C] hover:bg-[#006B3C] hover:text-white">
-                    <Link href={`/dashboard?template=${index === 0 ? 'elegant' : index === 1 ? 'cute' : 'formal'}`}>
-                      Pratonton Templat
-                    </Link>
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button asChild variant="outline" className="flex-1 border-gray-300 text-gray-700 hover:bg-gray-50">
+                      <Link href={`/dashboard?template=${index === 0 ? 'elegant' : index === 1 ? 'cute' : 'formal'}`}>
+                        Preview
+                      </Link>
+                    </Button>
+                    <Button asChild className="flex-1 bg-[#006B3C] hover:bg-[#004d2a] text-white">
+                      <Link href={`/dashboard?template=${index === 0 ? 'elegant' : index === 1 ? 'cute' : 'formal'}`}>
+                        Tempah
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -220,16 +244,16 @@ export default function Home() {
               </h3>
               <ul className="mb-8 space-y-3 text-left">
                 {[
-                  'Suntingan tanpa had pada Kad E-Card anda',
+                  'Edit tanpa had pada Kad Digital anda',
                   'Pautan boleh dikongsi secara awam',
                   'Sistem pengurusan RSVP',
-                  'Buku ucapan untuk doa',
+                  'Guestbook untuk ucapan',
                   'Kiraan masa',
                   'Integrasi peta (Google Maps & Waze)',
                   'Muzik latar',
                   'Jadual acara',
                   'Galeri foto',
-                  'Bahagian hadiah wang',
+                  'Bahagian Money Gift',
                   'Butang hubungan WhatsApp',
                 ].map((feature, index) => (
                   <li key={index} className="flex items-center gap-3">

@@ -56,7 +56,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
       if (response.ok) {
         setGuestName('');
         setMessage('');
-        alert('Doa berjaya dihantar!');
+        alert('Ucapan berjaya dihantar!');
         window.location.reload();
       }
     } catch (error) {
@@ -293,7 +293,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
         <div className="max-w-2xl mx-auto space-y-12">
           <div className="text-center space-y-4">
             <Heart className="mx-auto text-[#006B3C]" fill="#D4AF37" size={40} />
-            <h2 className="text-3xl md:text-4xl font-bold text-[#006B3C]">Doa & Ucapan</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#006B3C]">Guestbook</h2>
           </div>
 
           <div className="space-y-6">
@@ -310,14 +310,14 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
                 </motion.div>
               ))
             ) : (
-              <p className="text-center text-[#2C2416]/60 italic">Belum ada doa lagi. Jadilah yang pertama!</p>
+              <p className="text-center text-[#2C2416]/60 italic">Belum ada ucapan lagi. Jadilah yang pertama!</p>
             )}
           </div>
 
           {/* Wish Form */}
           {data.is_paid && data.id ? (
             <div className="bg-white p-8 rounded-2xl shadow-lg border-2 border-[#006B3C] space-y-4">
-              <h3 className="text-xl font-bold text-[#006B3C]">Tinggalkan Doa</h3>
+              <h3 className="text-xl font-bold text-[#006B3C]">Sampaikan Ucapan</h3>
               <div className="space-y-4">
                 <input 
                   type="text" 
@@ -327,7 +327,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
                   className="w-full border-b-2 border-[#D4AF37] py-2 focus:outline-none focus:border-[#006B3C] bg-transparent text-[#2C2416]"
                 />
                 <textarea 
-                  placeholder="Doa & Ucapan Anda" 
+                  placeholder="Ucapan Anda" 
                   rows={3}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -338,13 +338,13 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
                   disabled={isSubmitting}
                   className="bg-gradient-to-r from-[#006B3C] to-[#004d2a] text-white px-8 py-3 w-full hover:from-[#004d2a] hover:to-[#006B3C] transition-all font-semibold uppercase tracking-wider text-sm disabled:opacity-50 rounded-lg"
                 >
-                  {isSubmitting ? 'Menghantar...' : 'Hantar Doa'}
+                  {isSubmitting ? 'Menghantar...' : 'Hantar Ucapan'}
                 </button>
               </div>
             </div>
           ) : (
             <div className="text-center p-8 border-2 border-dashed border-[#D4AF37] rounded-xl bg-white/50">
-              <p className="text-[#006B3C] font-semibold">Buka kad ini untuk membolehkan doa tetamu!</p>
+              <p className="text-[#006B3C] font-semibold">Buka kad ini untuk membolehkan ucapan tetamu!</p>
             </div>
           )}
         </div>

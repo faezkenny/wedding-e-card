@@ -55,7 +55,7 @@ export default function CuteTemplate({ data, wishes, isPreview }: TemplateProps)
       if (response.ok) {
         setGuestName('');
         setMessage('');
-        alert('Doa berjaya dihantar!');
+        alert('Ucapan berjaya dihantar!');
         window.location.reload();
       }
     } catch (error) {
@@ -238,7 +238,7 @@ export default function CuteTemplate({ data, wishes, isPreview }: TemplateProps)
       <section className="py-20 px-6 bg-white/80 backdrop-blur-sm relative z-10">
         <div className="max-w-2xl mx-auto space-y-10">
           <div className="text-center">
-            <h2 className="text-4xl font-bold mb-2 text-[#8B4A6B]">Doa Manis 💕</h2>
+            <h2 className="text-4xl font-bold mb-2 text-[#8B4A6B]">Guestbook 💕</h2>
             <p className="font-medium text-[#8B4A6B]/80">Tinggalkan mesej untuk pasangan bahagia!</p>
           </div>
 
@@ -266,7 +266,7 @@ export default function CuteTemplate({ data, wishes, isPreview }: TemplateProps)
                 className="w-full bg-[#FFF0F5] border-2 border-transparent focus:border-[#FFB6C1] rounded-2xl p-4 outline-none transition-all placeholder:text-[#FF91A4] font-semibold"
               />
               <textarea 
-                placeholder="Doa Manis Anda... 💕" 
+                placeholder="Ucapan Anda... 💕" 
                 rows={3}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -277,12 +277,12 @@ export default function CuteTemplate({ data, wishes, isPreview }: TemplateProps)
                 disabled={isSubmitting}
                 className="bg-gradient-to-r from-[#FFB6C1] to-[#FF91A4] text-white font-bold py-4 rounded-2xl w-full shadow-lg shadow-[#FFB6C1]/30 hover:from-[#FF91A4] hover:to-[#FFB6C1] transition-all active:scale-95 disabled:opacity-50"
               >
-                {isSubmitting ? 'Menghantar...' : 'Hantar Doa! 💕'}
+                {isSubmitting ? 'Menghantar...' : 'Hantar Ucapan! 💕'}
               </button>
             </div>
           ) : (
             <div className="text-center p-8 border-2 border-dashed border-[#FFB6C1] rounded-3xl bg-white/50">
-              <p className="text-[#8B4A6B] font-bold">Buka kad ini untuk membolehkan doa tetamu!</p>
+              <p className="text-[#8B4A6B] font-bold">Buka kad ini untuk membolehkan ucapan tetamu!</p>
             </div>
           )}
         </div>

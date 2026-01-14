@@ -55,7 +55,7 @@ export default function FormalTemplate({ data, wishes, isPreview }: TemplateProp
       if (response.ok) {
         setGuestName('');
         setMessage('');
-        alert('Doa berjaya dihantar!');
+        alert('Ucapan berjaya dihantar!');
         window.location.reload();
       }
     } catch (error) {
