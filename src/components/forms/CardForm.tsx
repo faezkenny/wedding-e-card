@@ -311,7 +311,7 @@ export default function CardForm({ initialData, onUpdate, onSave }: CardFormProp
                 <Input id="gift_account_no" value={formData.gift_account_no || ''} onChange={(e) => updateField('gift_account_no', e.target.value)} placeholder="1234567890" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="gift_qr_url" className="text-sm">URL Imej Kod QR</Label>
+                <Label htmlFor="gift_qr_url" className="text-sm">QR Code Image URL</Label>
                 <Input id="gift_qr_url" value={formData.gift_qr_url || ''} onChange={(e) => updateField('gift_qr_url', e.target.value)} placeholder="https://example.com/kod-qr.jpg" />
               </div>
             </div>
