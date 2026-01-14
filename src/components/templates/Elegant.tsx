@@ -12,8 +12,8 @@ import RSVPForm from '../widgets/RSVPForm';
 import GiftSection from '../widgets/GiftSection';
 import { formatDateLong, formatTime } from '@/lib/date-utils';
 import { BatikFloral, IslamicBorder } from '../patterns/BatikPatterns';
-import { BismillahHeader, IslamicBlessing, IslamicPhrases } from '../patterns/ArabicCalligraphy';
-import { CrescentStar, BungaRaya } from '../patterns/MalaysianSymbols';
+import { BismillahHeader, IslamicBlessing, IslamicPhrases, ArabicCalligraphy } from '../patterns/ArabicCalligraphy';
+import { CrescentStar } from '../patterns/MalaysianSymbols';
 
 interface TemplateProps {
   data: ECardData;
@@ -67,15 +67,15 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F5F5DC] via-[#FFF8DC] to-[#F5F5DC] text-[#2C2416] font-serif overflow-x-hidden relative">
-      {/* Background Batik Pattern */}
-      <div className="fixed inset-0 opacity-5 pointer-events-none z-0">
-        <BatikFloral color="#D4AF37" opacity={0.1} className="w-full h-full" />
+    <div className="min-h-screen bg-[#F5F5DC] text-[#2C2416] font-serif overflow-x-hidden relative">
+      {/* Prominent Batik Pattern Background */}
+      <div className="fixed inset-0 opacity-15 pointer-events-none z-0">
+        <BatikFloral color="#D4AF37" opacity={0.3} className="w-full h-full" />
       </div>
 
       {/* Islamic Border Pattern */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <IslamicBorder color="#006B3C" opacity={0.08} className="w-full h-full" />
+        <IslamicBorder color="#006B3C" opacity={0.12} className="w-full h-full" />
       </div>
 
       {/* Background Music */}
@@ -86,7 +86,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
       {/* Music Toggle */}
       <button 
         onClick={toggleMusic}
-        className="fixed bottom-6 right-6 z-50 bg-[#D4AF37]/90 backdrop-blur-sm p-3 rounded-full shadow-lg border-2 border-[#006B3C]/20 text-[#006B3C] hover:bg-[#D4AF37] transition-all"
+        className="fixed bottom-6 right-6 z-50 bg-[#D4AF37]/90 backdrop-blur-sm p-3 rounded-full shadow-lg border-2 border-[#006B3C]/30 text-[#006B3C] hover:bg-[#D4AF37] transition-all"
       >
         {isPlaying ? <Pause size={24} /> : <Music size={24} />}
       </button>
@@ -96,72 +96,67 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
         <WhatsAppButtons contacts={data.contact_info} />
       )}
 
-      {/* Hero Section */}
-      <section className="relative h-screen flex flex-col items-center justify-center text-center p-6 z-10">
+      {/* Hero Section with Batik Border */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center p-6 z-10 border-b-8 border-[#006B3C]">
         {isPreview && (
           <div className="absolute top-10 left-0 w-full bg-red-500/10 text-red-700 py-2 font-sans font-bold uppercase tracking-widest text-sm z-50 border-y-2 border-red-500/20">
             Mod Demo - Buka dengan RM10
           </div>
         )}
         
-        {/* Bismillah Header */}
-        <BismillahHeader className="mb-4" />
-
+        {/* Large Arabic Calligraphy - Khat Style */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
+          className="mb-8"
+        >
+          <BismillahHeader />
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
           className="space-y-6 max-w-4xl"
         >
-          {/* Crescent and Star */}
-          <div className="flex justify-center gap-4 mb-4">
-            <CrescentStar size={40} color="#D4AF37" />
+          {/* Decorative Batik Border */}
+          <div className="relative py-8 px-12 border-4 border-[#D4AF37] bg-white/80 backdrop-blur-sm">
+            <div className="absolute inset-0 opacity-20">
+              <BatikFloral color="#006B3C" opacity={0.2} className="w-full h-full" />
+            </div>
+            
+            <p className="uppercase tracking-[0.3em] text-sm text-[#006B3C] font-semibold mb-4">Majlis Perkahwinan</p>
+            <h1 className="text-5xl md:text-7xl font-bold text-[#2C2416] leading-tight">
+              {data.groom_name} <br />
+              <span className="text-3xl md:text-4xl text-[#D4AF37]">&</span> <br />
+              {data.bride_name}
+            </h1>
+            
+            {/* Batik Pattern Divider */}
+            <div className="my-6 h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
+            
+            <p className="text-xl md:text-2xl text-[#2C2416] font-medium">
+              {formatDateLong(data.wedding_date)}
+            </p>
           </div>
 
-          <p className="uppercase tracking-[0.3em] text-sm text-[#006B3C] font-semibold">Majlis Perkahwinan</p>
-          <h1 className="text-5xl md:text-7xl font-bold text-[#2C2416] leading-tight">
-            {data.groom_name} <br />
-            <span className="text-3xl md:text-4xl text-[#D4AF37]">&</span> <br />
-            {data.bride_name}
-          </h1>
-          
-          {/* Decorative Line with Bunga Raya */}
-          <div className="flex items-center justify-center gap-4 my-6">
-            <BungaRaya size={30} color="#D4AF37" />
-            <div className="w-24 h-px bg-gradient-to-r from-[#D4AF37] to-[#006B3C]" />
-            <BungaRaya size={30} color="#006B3C" />
-            <div className="w-24 h-px bg-gradient-to-r from-[#006B3C] to-[#D4AF37]" />
-            <BungaRaya size={30} color="#D4AF37" />
+          {/* Arabic Blessing in Khat Style */}
+          <div className="mt-8">
+            <ArabicCalligraphy text={IslamicPhrases.barakallahu} size="medium" />
+            <p className="text-sm mt-2 opacity-70">Barakallahu lakuma</p>
           </div>
 
-          <p className="text-xl md:text-2xl text-[#2C2416] font-medium">
-            {formatDateLong(data.wedding_date)}
-          </p>
-          
           {/* Countdown Timer */}
           {data.countdown_date && (
             <div className="mt-8">
               <CountdownTimer targetDate={data.countdown_date} />
             </div>
           )}
-
-          {/* Islamic Blessing */}
-          <div className="mt-8">
-            <IslamicBlessing />
-          </div>
-        </motion.div>
-
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-10 animate-bounce"
-        >
-          <p className="text-xs uppercase tracking-widest text-[#006B3C]">Scroll ke bawah</p>
         </motion.div>
       </section>
 
-      {/* Details Section */}
+      {/* Details Section with Batik Accents */}
       <section className="py-24 px-6 max-w-4xl mx-auto text-center space-y-16 relative z-10">
         <motion.div
           initial={{ opacity: 0 }}
@@ -182,36 +177,41 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-[#006B3C] to-[#004d2a] p-12 rounded-2xl shadow-xl border-4 border-[#D4AF37] text-white space-y-6"
+            className="bg-gradient-to-br from-[#006B3C] to-[#004d2a] p-12 rounded-lg shadow-xl border-4 border-[#D4AF37] text-white space-y-6 relative overflow-hidden"
           >
-            <div className="flex justify-center mb-4">
-              <CrescentStar size={50} color="#D4AF37" />
+            <div className="absolute inset-0 opacity-10">
+              <BatikFloral color="#D4AF37" opacity={0.3} className="w-full h-full" />
             </div>
-            <h3 className="text-2xl font-bold text-[#D4AF37] uppercase tracking-wider">Akad Nikah</h3>
-            <div className="space-y-4">
-              <div>
-                <p className="text-sm opacity-80 mb-1">Tarikh & Masa</p>
-                <p className="text-xl font-semibold">{formatDateLong(data.akad_nikah_date)}</p>
-                <p className="text-lg">{formatTime(data.akad_nikah_date)}</p>
+            <div className="relative z-10">
+              <div className="flex justify-center mb-4">
+                <CrescentStar size={50} color="#D4AF37" />
               </div>
-              {data.akad_nikah_venue && (
+              <h3 className="text-2xl font-bold text-[#D4AF37] uppercase tracking-wider mb-6">Akad Nikah</h3>
+              <div className="space-y-4">
                 <div>
-                  <p className="text-sm opacity-80 mb-1">Tempat</p>
-                  <p className="text-xl font-semibold">{data.akad_nikah_venue}</p>
+                  <p className="text-sm opacity-80 mb-1">Tarikh & Masa</p>
+                  <p className="text-xl font-semibold">{formatDateLong(data.akad_nikah_date)}</p>
+                  <p className="text-lg">{formatTime(data.akad_nikah_date)}</p>
                 </div>
-              )}
-              {data.wali_name && (
-                <div>
-                  <p className="text-sm opacity-80 mb-1">Wali</p>
-                  <p className="text-xl font-semibold">{data.wali_name}</p>
-                </div>
-              )}
-              {data.mas_kahwin && (
-                <div>
-                  <p className="text-sm opacity-80 mb-1">Mas Kahwin</p>
-                  <p className="text-xl font-semibold">{data.mas_kahwin}</p>
-                </div>
-              )}
+                {data.akad_nikah_venue && (
+                  <div>
+                    <p className="text-sm opacity-80 mb-1">Tempat</p>
+                    <p className="text-xl font-semibold">{data.akad_nikah_venue}</p>
+                  </div>
+                )}
+                {data.wali_name && (
+                  <div>
+                    <p className="text-sm opacity-80 mb-1">Wali</p>
+                    <p className="text-xl font-semibold">{data.wali_name}</p>
+                  </div>
+                )}
+                {data.mas_kahwin && (
+                  <div>
+                    <p className="text-sm opacity-80 mb-1">Mas Kahwin</p>
+                    <p className="text-xl font-semibold">{data.mas_kahwin}</p>
+                  </div>
+                )}
+              </div>
             </div>
           </motion.div>
         )}
@@ -221,8 +221,9 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="bg-white p-12 rounded-2xl shadow-lg border-4 border-[#D4AF37] space-y-8"
+          className="bg-white p-12 rounded-lg shadow-lg border-4 border-[#D4AF37] space-y-8 relative overflow-hidden"
         >
+          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#006B3C] via-[#D4AF37] to-[#006B3C]" />
           <h3 className="text-2xl font-bold text-[#006B3C] uppercase tracking-wider mb-6">Majlis Resepsi</h3>
           <div className="space-y-6">
             <div className="space-y-2">
@@ -237,7 +238,6 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
               </p>
             </div>
 
-            {/* Map Buttons */}
             <MapButtons 
               googleMapsUrl={data.google_maps_url}
               wazeUrl={data.waze_url}
@@ -253,7 +253,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="bg-white p-12 rounded-2xl shadow-lg border-4 border-[#006B3C]"
+            className="bg-white p-12 rounded-lg shadow-lg border-2 border-[#006B3C]"
           >
             <ItineraryTimeline items={data.itinerary} />
           </motion.div>
@@ -268,7 +268,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
               <h2 className="text-3xl md:text-4xl font-bold text-[#006B3C] mb-2">RSVP</h2>
               <p className="text-[#2C2416]">Sila beritahu kami jika anda dapat hadir</p>
             </div>
-            <div className="bg-white p-8 rounded-2xl shadow-lg border-2 border-[#D4AF37]">
+            <div className="bg-white p-8 rounded-lg shadow-lg border-2 border-[#D4AF37]">
               <RSVPForm ecardId={data.id} rsvpDeadline={data.rsvp_deadline} />
             </div>
           </div>
@@ -303,7 +303,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
                   key={wish.id}
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  className="bg-white p-6 rounded-xl shadow-md border-2 border-[#D4AF37]/30"
+                  className="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#D4AF37]"
                 >
                   <p className="font-semibold text-[#006B3C] text-lg">{wish.guest_name}</p>
                   <p className="text-[#2C2416] mt-2 italic">"{wish.message}"</p>
@@ -316,7 +316,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
 
           {/* Wish Form */}
           {data.is_paid && data.id ? (
-            <div className="bg-white p-8 rounded-2xl shadow-lg border-2 border-[#006B3C] space-y-4">
+            <div className="bg-white p-8 rounded-lg shadow-lg border-2 border-[#006B3C] space-y-4">
               <h3 className="text-xl font-bold text-[#006B3C]">Sampaikan Ucapan</h3>
               <div className="space-y-4">
                 <input 
@@ -343,7 +343,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
               </div>
             </div>
           ) : (
-            <div className="text-center p-8 border-2 border-dashed border-[#D4AF37] rounded-xl bg-white/50">
+            <div className="text-center p-8 border-2 border-dashed border-[#D4AF37] rounded-lg bg-white/50">
               <p className="text-[#006B3C] font-semibold">Buka kad ini untuk membolehkan ucapan tetamu!</p>
             </div>
           )}
