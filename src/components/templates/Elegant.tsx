@@ -4,6 +4,12 @@ import { ECardData, Wish } from './types';
 import { motion } from 'framer-motion';
 import { Play, Pause, Music, Heart } from 'lucide-react';
 import { useState, useRef } from 'react';
+import CountdownTimer from '../widgets/CountdownTimer';
+import ItineraryTimeline from '../widgets/ItineraryTimeline';
+import MapButtons from '../widgets/MapButtons';
+import WhatsAppButtons from '../widgets/WhatsAppButtons';
+import RSVPForm from '../widgets/RSVPForm';
+import GiftSection from '../widgets/GiftSection';
 
 interface TemplateProps {
   data: ECardData;
@@ -31,7 +37,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
   };
 
   const handleWishSubmit = async () => {
-    if (!guestName || !message) return;
+    if (!guestName || !message || !data.id) return;
     setIsSubmitting(true);
     try {
       const response = await fetch('/api/wishes/create', {
@@ -47,7 +53,7 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
         setGuestName('');
         setMessage('');
         alert('Wish sent successfully!');
-        window.location.reload(); // Simple way to refresh wishes
+        window.location.reload();
       }
     } catch (error) {
       console.error('Error submitting wish:', error);
@@ -70,6 +76,11 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
       >
         {isPlaying ? <Pause size={24} /> : <Music size={24} />}
       </button>
+
+      {/* WhatsApp Buttons */}
+      {data.contact_info && data.contact_info.length > 0 && (
+        <WhatsAppButtons contacts={data.contact_info} />
+      )}
 
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col items-center justify-center text-center p-6 bg-gradient-to-b from-white to-[#fdfaf6]">
@@ -100,6 +111,13 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
               day: 'numeric' 
             })}
           </p>
+          
+          {/* Countdown Timer */}
+          {data.countdown_date && (
+            <div className="mt-8">
+              <CountdownTimer targetDate={data.countdown_date} />
+            </div>
+          )}
         </motion.div>
 
         <motion.div 
@@ -148,8 +166,56 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
               })}
             </p>
           </div>
+
+          {/* Map Buttons */}
+          <MapButtons 
+            googleMapsUrl={data.google_maps_url}
+            wazeUrl={data.waze_url}
+            venue={data.wedding_venue}
+            className="mt-6"
+          />
         </motion.div>
+
+        {/* Itinerary */}
+        {data.itinerary && data.itinerary.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="bg-white p-12 border border-[#e5d5c5] shadow-sm"
+          >
+            <ItineraryTimeline items={data.itinerary} />
+          </motion.div>
+        )}
       </section>
+
+      {/* RSVP Section */}
+      {data.is_paid && data.id && (
+        <section className="py-24 px-6 bg-white">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-light mb-2">RSVP</h2>
+              <p className="text-[#6b6b6b]">Please let us know if you can attend</p>
+            </div>
+            <div className="bg-[#f7f3ef] p-8 rounded-lg">
+              <RSVPForm ecardId={data.id} rsvpDeadline={data.rsvp_deadline} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Gift Section */}
+      {(data.gift_bank_name || data.gift_account_no || data.gift_qr_url) && (
+        <section className="py-24 px-6 bg-[#f7f3ef]">
+          <div className="max-w-2xl mx-auto">
+            <GiftSection
+              bankName={data.gift_bank_name}
+              accountNo={data.gift_account_no}
+              qrUrl={data.gift_qr_url}
+            />
+          </div>
+        </section>
+      )}
 
       {/* Guestbook Section */}
       <section className="py-24 px-6 bg-[#f7f3ef]">
@@ -177,12 +243,8 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
             )}
           </div>
 
-          {/* Wish Form - Only if paid or demo */}
-          {!data.is_paid && !isPreview ? (
-            <div className="text-center p-8 border-2 border-dashed border-[#e5d5c5] rounded-xl">
-              <p className="text-[#8e735b]">Unlock this card to enable guest wishes!</p>
-            </div>
-          ) : (
+          {/* Wish Form */}
+          {data.is_paid && data.id ? (
             <div className="bg-white p-8 border border-[#e5d5c5] shadow-sm space-y-4">
               <h3 className="text-xl font-light">Leave a Wish</h3>
               <div className="space-y-4">
@@ -208,6 +270,10 @@ export default function ElegantTemplate({ data, wishes, isPreview }: TemplatePro
                   {isSubmitting ? 'Sending...' : 'Send Wish'}
                 </button>
               </div>
+            </div>
+          ) : (
+            <div className="text-center p-8 border-2 border-dashed border-[#e5d5c5] rounded-xl">
+              <p className="text-[#8e735b]">Unlock this card to enable guest wishes!</p>
             </div>
           )}
         </div>

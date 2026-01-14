@@ -31,12 +31,23 @@ export default async function PublicCardPage({
       id: ecard.id,
       bride_name: ecard.brideName,
       groom_name: ecard.groomName,
+      parents_names: ecard.parentsNames as any,
       wedding_date: ecard.weddingDate.toISOString(),
       wedding_venue: ecard.weddingVenue,
       music_url: ecard.musicUrl || undefined,
       template_type: ecard.templateType as 'cute' | 'elegant' | 'formal',
       is_paid: ecard.isPaid,
       config: ecard.config as any,
+      itinerary: ecard.itinerary as any,
+      contact_info: ecard.contactInfo as any,
+      google_maps_url: ecard.googleMapsUrl || undefined,
+      waze_url: ecard.wazeUrl || undefined,
+      gift_bank_name: ecard.giftBankName || undefined,
+      gift_account_no: ecard.giftAccountNo || undefined,
+      gift_qr_url: ecard.giftQrUrl || undefined,
+      countdown_date: ecard.countdownDate?.toISOString(),
+      rsvp_deadline: ecard.rsvpDeadline?.toISOString(),
+      photo_gallery: ecard.photoGallery as any,
     };
 
     const typedWishes: Wish[] = wishes.map(w => ({

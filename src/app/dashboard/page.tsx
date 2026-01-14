@@ -1,17 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CardForm from '@/components/forms/CardForm';
 import TemplateRenderer from '@/components/templates/TemplateRenderer';
 import { ECardData } from '@/components/templates/types';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function Dashboard() {
   const [cardData, setCardData] = useState<ECardData>({
-    bride_name: 'Siti',
-    groom_name: 'Ahmad',
+    bride_name: '',
+    groom_name: '',
     wedding_date: new Date(Date.now() + 86400000 * 30).toISOString(),
-    wedding_venue: 'Grand Hall, Kuala Lumpur',
+    wedding_venue: '',
     template_type: 'elegant',
     is_paid: false,
     music_url: '',
@@ -48,7 +47,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col lg:flex-row">
       {/* Sidebar Form */}
-      <div className="w-full lg:w-[450px] lg:h-screen lg:overflow-y-auto bg-white border-r border-gray-200 z-10">
+      <div className="w-full lg:w-[500px] lg:h-screen lg:overflow-y-auto bg-white border-r border-gray-200 z-10">
         <div className="p-6">
           <CardForm 
             initialData={cardData} 

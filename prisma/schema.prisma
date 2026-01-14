@@ -25,6 +25,7 @@ model ECard {
   ownerId       String   @map("owner_id")
   brideName     String   @map("bride_name")
   groomName     String   @map("groom_name")
+  parentsNames  Json?    @map("parents_names") // {brideFather, brideMother, groomFather, groomMother}
   weddingDate   DateTime @map("wedding_date")
   weddingVenue  String   @map("wedding_venue")
   musicUrl      String?  @map("music_url")
@@ -32,11 +33,25 @@ model ECard {
   isPaid        Boolean  @default(false) @map("is_paid")
   slug          String   @unique
   config        Json?    @default("{}")
+  
+  // New OnlineKad-style fields
+  itinerary     Json?    // Array of {title, time, description}
+  contactInfo   Json?    @map("contact_info") // Array of {name, phone, whatsapp}
+  googleMapsUrl String?  @map("google_maps_url")
+  wazeUrl       String?  @map("waze_url")
+  giftBankName  String?  @map("gift_bank_name")
+  giftAccountNo String?  @map("gift_account_no")
+  giftQrUrl     String?  @map("gift_qr_url")
+  countdownDate DateTime? @map("countdown_date")
+  rsvpDeadline  DateTime? @map("rsvp_deadline")
+  photoGallery  Json?    @map("photo_gallery") // Array of image URLs
+  
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
   owner         User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   wishes        Wish[]
   payments      Payment[]
+  rsvps         RSVP[]
   
   @@map("ecards")
   @@index([ownerId])
@@ -52,6 +67,23 @@ model Wish {
   
   @@map("wishes")
   @@index([ecardId])
+}
+
+model RSVP {
+  id            String   @id @default(uuid())
+  ecardId       String   @map("ecard_id")
+  guestName     String   @map("guest_name")
+  phoneNumber   String?  @map("phone_number")
+  numberOfPax   Int      @default(1) @map("number_of_pax")
+  status        String   @default("going") // 'going' | 'not_going' | 'maybe'
+  message       String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  ecard         ECard    @relation(fields: [ecardId], references: [id], onDelete: Cascade)
+  
+  @@map("rsvps")
+  @@index([ecardId])
+  @@index([status])
 }
 
 model Payment {
